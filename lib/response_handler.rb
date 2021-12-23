@@ -1,5 +1,3 @@
-require 'faraday'
-
 class ResponseHandler
 
   def initialize(response, list: false)

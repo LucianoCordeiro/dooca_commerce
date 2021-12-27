@@ -1,11 +1,11 @@
 class ResponseHandler
 
-  def initialize(response, list: false)
+  def initialize(response, single_from_list: false)
     @response = response
-    @list = list
+    @single_from_list = single_from_list
   end
 
-  attr_reader :response, :list
+  attr_reader :response, :single_from_list
 
   def parse!
     success? ? handle_success : handle_error
@@ -14,7 +14,7 @@ class ResponseHandler
   private
 
   def handle_success
-    @payload = payload.data.first if payload.data.present? && !list
+    @payload = payload.data.first if single_from_list
 
     payload.success = true
 
@@ -32,6 +32,6 @@ class ResponseHandler
   end
 
   def success?
-    response.status == 200
+    single_from_list ? payload.data&.first.present? : (response.status == 200)
   end
 end

@@ -11,31 +11,31 @@ class DoocaCommerce
   attr_reader :token, :handler
 
   def fetch_products(query = {})
-    response = Faraday.get("#{URL}/products", query, header)
+    response = connection.get("/products", query)
 
-    handler.new(response, list: true).parse!
+    handler.new(response).parse!
   end
 
   def fetch_product(query = {})
-    response = Faraday.get("#{URL}/products", query, header)
+    response = connection.get("/products", query)
 
-    handler.new(response).parse!
+    handler.new(response, single_from_list: true).parse!
   end
 
   def fetch_variations(query = {})
-    response = Faraday.get("#{URL}/variations", query, header)
-
-    handler.new(response, list: true).parse!
-  end
-
-  def fetch_variation(query = {})
-    response = Faraday.get("#{URL}/variations", query, header)
+    response = connection.get("/variations", query)
 
     handler.new(response).parse!
   end
 
+  def fetch_variation(query = {})
+    response = connection.get("/variations", query)
+
+    handler.new(response, single_from_list: true).parse!
+  end
+
   def update_stock_and_price(product_id:, body:)
-    response = Faraday.put("#{URL}/products/#{product_id}", body.to_json, header)
+    response = connection.put("/products/#{product_id}", body.to_json)
 
     handler.new(response).parse!
   end
@@ -44,7 +44,14 @@ class DoocaCommerce
 
   URL = "https://api.dooca.store"
 
-  def header
-    {"Authorization": "Bearer #{token}"}
+  def headers
+    {
+      "Content-Type" => "application/json",
+      "Authorization": "Bearer #{token}"
+    }
+  end
+
+  def connection
+    @connection ||= Faraday.new(url: URL, headers: headers)
   end
 end

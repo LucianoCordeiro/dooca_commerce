@@ -32,6 +32,6 @@ class ResponseHandler
   end
 
   def success?
-    single_from_list ? payload.data&.first.present? : (response.status == 200)
+    single_from_list ? payload.data&.first.present? : (200..204).include?(response.status)
   end
 end

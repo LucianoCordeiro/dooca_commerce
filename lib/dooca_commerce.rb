@@ -46,6 +46,18 @@ class DoocaCommerce
     handler.new(response).parse!
   end
 
+  def fetch_orders(query = {})
+    response = connection.get("/orders", query)
+
+    handler.new(response).parse!
+  end
+
+  def fetch_order(order_id:)
+    response = connection.get("/orders/#{order_id}")
+
+    handler.new(response).parse!
+  end
+
   def fetch_colors(query = {})
     response = connection.get("/colors", query)
 

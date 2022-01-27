@@ -1,13 +1,13 @@
 PATH
   remote: .
   specs:
-    dooca_commerce (1.0.3)
+    dooca_commerce (1.0.4)
       faraday
 
 GEM
   remote: https://rubygems.org/
   specs:
-    faraday (2.0.1)
+    faraday (2.1.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.1)

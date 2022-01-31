@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dooca_commerce (1.0.4)
+    dooca_commerce (1.0.5)
       faraday
 
 GEM

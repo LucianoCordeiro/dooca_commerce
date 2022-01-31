@@ -160,6 +160,30 @@ class DoocaCommerce
     handler.new(response).parse!
   end
 
+  def create_fulfillment(order_id:)
+    response = connection.post("/orders/#{order_id}/fulfillment")
+
+    handler.new(response).parse!
+  end
+
+  def update_invoice(order_id:, body:)
+    response = connection.put("/orders/#{order_id}/fulfillment/invoiced", body.to_json)
+
+    handler.new(response).parse!
+  end
+
+  def update_tracking(order_id:, body:)
+    response = connection.put("/orders/#{order_id}/fulfillment/shipped", body.to_json)
+
+    handler.new(response).parse!
+  end
+
+  def mark_as_delivered(order_id:)
+    response = connection.put("/orders/#{order_id}/fulfillment/delivered")
+
+    handler.new(response).parse!
+  end
+
   private
 
   URL = "https://api.dooca.store"

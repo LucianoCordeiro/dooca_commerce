@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'dooca_commerce'
-  s.version     = '1.0.5'
+  s.version     = '1.0.6'
   s.summary     = "Dooca Commerce!"
   s.description = "A Ruby implementation of Dooca Commerce API"
   s.authors     = ["Luciano Cesar Cordeiro"]

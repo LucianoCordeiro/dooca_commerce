@@ -28,7 +28,7 @@ class ResponseHandler
   end
 
   def payload
-    @payload ||= JSON.parse(response.body, object_class: OpenStruct)
+    @payload ||= JSON.parse(response.body.presence || "{}", object_class: OpenStruct)
   end
 
   def success?

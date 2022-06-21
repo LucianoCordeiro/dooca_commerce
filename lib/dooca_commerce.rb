@@ -184,6 +184,18 @@ class DoocaCommerce
     handler.new(response).parse!
   end
 
+  def delete_image(product_id:, image_id:)
+    response = connection.delete("/products/#{product_id}/images/#{image_id}")
+
+    handler.new(response).parse!
+  end
+
+  def create_image(product_id:, body:)
+    response = connection.post("/products/#{product_id}/images", body.to_json)
+
+    handler.new(response).parse!
+  end
+
   private
 
   URL = "https://api.dooca.store"
